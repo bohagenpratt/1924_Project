@@ -29,3 +29,19 @@ url = 'https://api.dp.la/v2/items?q=immig*+AND+law*&sourceResource.date.after=18
 
 After parsing the json from the request object, the next step was deciding what fields to include in the dataframe. The sourceResource key within json contains most of the information I wanted and became the basis of the fields in the df.
 
+![The sourceResource key from DPLA's API](Source_resource.png)
+
+```
+df = pd.DataFrame({
+   'ID': ids,
+   'Title': title,
+   'URL': link,
+   'Dates': date,
+   'Locations': location,
+   'Description': description,
+   'Subjects': subjects,
+   'Creator': creator,
+   'Contributor': contributor
+})
+```
+**Data Cleaning**
