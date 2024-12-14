@@ -15,7 +15,17 @@ The general methodology is using the Python requests library to make API calls f
 
 I identified several archives with large collections of digitized historical documents, including the Digital Public Library of America (DPLA) and the National Archives. Retrieving digitized documents was the focus in the belief that they’d offer richer information for users, such as images, URLs, subject headings and descriptions. 
 
-Given time restrictions and the challenges of learning APIs from different institutions, I chose to work only with the DPLA, which has extensive and detailed [documentation for its API](https://pro.dp.la/developers/api-codex). 
+Given time restrictions and the challenges of learning APIs from different institutions, for now I chose to work only with the DPLA, which has extensive and detailed [documentation for its API](https://pro.dp.la/developers/api-codex). 
 
 **Querying** 
+
+First query used wildcard operators to search for documents about immigration (*or immigrants*) and law. Using the API’s temporal searching and pagination functionalities, the initial query was limited to 100 docs between the years 1880 and 1945, covering the periods when most restrictions were created. A later version of this query expanded the document limit to 500, which became the dataset used for the analysis described below. 
+
+```
+import requests
+url = 'https://api.dp.la/v2/items?q=immig*+AND+law*&sourceResource.date.after=1880&sourceResource.date.before=1945&page_size=100&api_key=7e794707ae677b5eb408334e9e6cc16e'
+```
+**Building the dataframe**
+
+After parsing the json from the request object, the next step was deciding what fields to include in the dataframe. The sourceResource key within json contains most of the information I wanted and became the basis of the fields in the df.
 
