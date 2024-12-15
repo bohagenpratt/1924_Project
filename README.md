@@ -82,15 +82,27 @@ Given the query terms, the docs in the dataset mostly concern laws, debates abou
 
 How can Python be used to analyze how these policies affected particular communities or groups of people? Whose “exclusions” are represented in this dataset?
 
-One approach is illustrated below, employing the string contains() method to find variations of the term "Chinese" in subject headings (i.e. Chinese--Hawaii, Chinese American). 
+One approach is illustrated below, employing the `string contains()` method to find variations of the term "Chinese" in subject headings (i.e. Chinese--Hawaii, Chinese American). 
 
 ```
 chinese_excl = df['Subjects_grouped'].str.contains('Chinese', na=False)
 ```
 
-It yielded a set of 37 docs relating to Chinese Exclusion (1882-1943) that can be used to create another df for that topic. Since it contains other info including the doc titles, descriptions, creators and URLs, the df allows users to include all the data they need in one place, rather than cobbling it together from catalog searches.
+It yielded a set of 37 docs relating to Chinese Exclusion (1882-1943) that can be used to create another df for that topic. Since it contains other info including the doc titles, descriptions, creators and URLs, the df gives users all the data they need in one place, rather than cobbling it together from catalog searches.
 
-A slightly different method  
+A slightly different method uses the DataFrame apply() method to apply `string contains()`within a `Lambda` function. This searches *all* columns of the df, and pulls additional docs with "Chinese" in fields other than Subjects, such as Title or Description.
+
+```
+Chinese_allcols = df.apply(lambda x: x.str.contains('Chinese', na=False), axis=1).any(axis=1)
+```
+
+A similar search for the immigration laws concerning women:
+
+```
+Women_allcols = df.apply(lambda x: x.str.contains('women', na=False), axis=1).any(axis=1)
+```
+
+
 
 
 
