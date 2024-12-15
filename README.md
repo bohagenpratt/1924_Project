@@ -19,7 +19,9 @@ Given time restrictions and the challenges of learning APIs from different insti
 
 **Querying** 
 
-First query used wildcard operators to search for documents about immigration (*or immigrants*) and law. Using the API’s temporal searching and pagination functionalities, the initial query was limited to 100 docs between the years 1880 and 1945, covering the periods when most restrictions were created. A later version of this query expanded the document limit to 500, which became the dataset used for the analysis described below. 
+First query used wildcard operators to search for documents about immigration (*or immigrants*) and law. Using the API’s temporal searching and pagination functionalities, the initial query was limited to 100 docs between the years 1880 and 1945, covering the periods when most restrictions were created. 
+
+A later version of this query expanded the document limit to 500, which became the dataset used for the analysis described below. 
 
 ```
 import requests
@@ -45,3 +47,14 @@ df = pd.DataFrame({
 })
 ```
 **Data Cleaning**
+
+This was *easily* the biggest challenge and most time-consuming aspaect of the project. Since the data was in dictionaries, I struggled to access the key:value pairs for some of the values that would be most helpful for analysis, particularly subject headings and geographic locations. 
+
+Subjects proved uniquely trying to work with. Most documents in the df had subjects from their DPLA record, from as few as one to as many as 12 for a single record.
+```
+immig_docs[2]['sourceResource']['subject']
+[{'name': 'Working class--Dwellings'}, {'name': 'Tenement houses--California'}]
+```
+Despite much toil, efforts to create separate columns for each individual subject or location using Python were unsuccessful, and I had to settle for all the subjects and locations for a given document being lumped into one Subjects or Locations field.
+
+![Error received while appending subjects]()
