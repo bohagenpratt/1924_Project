@@ -68,8 +68,8 @@ df[['Location_one', 'Location_two', 'Location_three', 'Location_four', 'Location
 Converting each column in the df to a string and then using the string replace() method was a helpful workaround for cleaning unwanted punctuation like dict brackets and quotation marks: 
 
 ```
-df['Location_one'] = df['Location_one'].astype(str)
-df['Location_one'] = df['Location_one'].str.replace("'", ' ')
+df['Title'] = df['Title'].astype(str)
+df['Title'] = df['Title'].str.replace('[', ' ')
 ```
 
 Unfortunately the string split() method did not work for the subjects due to a repeated `ValueError: Columns must be same length as key`, forcing me to do the work in my CSV file instead. 
