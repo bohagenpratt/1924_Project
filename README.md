@@ -102,7 +102,14 @@ A similar search for the immigration laws concerning women:
 Women_allcols = df.apply(lambda x: x.str.contains('women', na=False), axis=1).any(axis=1)
 ```
 
+A visualization of this search shows that most docs date between the 1920s and 1940s, when the issue of citizenship status for American women married to "aliens" was debated in Congress.
 
+![Bar chart showing date ranges](Women_docs_dates.png)
 
+### Future Directions
+
+Using the code and methods outlined here can be the basis 
+
+### Files
 
 
