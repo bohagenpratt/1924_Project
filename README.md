@@ -73,3 +73,24 @@ df['Title'] = df['Title'].str.replace('[', ' ')
 ```
 
 Unfortunately the string split() method did not work for the subjects due to a repeated `ValueError: Columns must be same length as key`, forcing me to do the work in my CSV file instead. 
+
+### Analysis 
+
+Once the data was clean, I used Pandas and the Matplotlib graph plotting library to analyze it and create data visualizations. 
+
+Given the query terms, the docs in the dataset mostly concern laws, debates about their passage and contemporary reports on them. Many of the docs were created by entities including Congressional committees and state representatives, thus primarily reflecting government perspectives. 
+
+How can Python be used to analyze how these policies affected particular communities or groups of people? Whose “exclusions” are represented in this dataset?
+
+One approach is illustrated below, employing the string contains() method to find variations of the term "Chinese" in subject headings (i.e. Chinese--Hawaii, Chinese American). 
+
+```
+chinese_excl = df['Subjects_grouped'].str.contains('Chinese', na=False)
+```
+
+It yielded a set of 37 docs relating to Chinese Exclusion (1882-1943) that can be used to create another df for that topic. Since it contains other info including the doc titles, descriptions, creators and URLs, the df allows users to include all the data they need in one place, rather than cobbling it together from catalog searches.
+
+A slightly different method  
+
+
+
