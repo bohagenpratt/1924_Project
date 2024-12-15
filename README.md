@@ -49,18 +49,18 @@ df = pd.DataFrame({
 
 **Data Cleaning**
 
-This was *easily* the biggest challenge and most time-consuming aspect of the project. Since the data was in dictionaries, I struggled to access the key:value pairs for some of the values that would be most helpful for analysis, particularly subject headings and geographic locations. 
+This was *easily* the biggest challenge and most time-consuming aspect of the project. Since the data was in dictionaries, I struggled to access the key:value pairs that would be most helpful for analysis, particularly subject headings and geographic locations. 
 
 Subjects proved uniquely trying to work with. Most documents in the DF had subjects from their DPLA record, from as few as one to as many as 12 for a single record.
 ```
 immig_docs[2]['sourceResource']['subject']
 [{'name': 'Working class--Dwellings'}, {'name': 'Tenement houses--California'}]
 ```
-Despite much toil, efforts to create separate columns for each individual subject or location using Python were unsuccessful, and I had to settle for all the subjects and locations for a given document being lumped into one Subjects or Locations field.
+Despite much toil, efforts to create separate columns in the DF for each individual subject or location were unsuccessful, and I had to settle for all the subjects and locations for a given document being lumped into one Subjects or Locations field.
 
 ![Error received while appending subjects](Subject_troubles.png)
 
-For cleaning data, I used the Pandas library in Python, and was able to break the locations out into individual columns with the `string split()` method: 
+For cleaning data I used the Pandas library, and was able to break the locations out into individual columns with the `string split()` method: 
 
 ```
 df[['Location_one', 'Location_two', 'Location_three', 'Location_four', 'Location_five']] = df['Locations'].str.split(',', expand=True)
